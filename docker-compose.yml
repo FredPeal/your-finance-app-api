@@ -41,10 +41,25 @@ services:
       - dbdata:/var/lib/mysql
     networks:
       - local-network
-
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 9001:80
+    environment:
+      PMA_HOST: db
+      PMA_ARBITRARY: 1
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+     - /sessions
+    networks: 
+      local-network:
+      public-network: 
 networks:
-  - local-network:
-  - public-network:
+  local-network:
+  public-network:
   
 volumes:
   dbdata:
