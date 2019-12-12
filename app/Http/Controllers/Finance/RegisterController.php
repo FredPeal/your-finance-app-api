@@ -12,6 +12,8 @@ class RegisterController extends Controller
     //
     public function register(RegisterRequest $request)
     {
+        $request->validated();
+
         DB::beginTransaction();
         try {
             DB::commit();

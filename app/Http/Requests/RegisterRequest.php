@@ -13,7 +13,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,9 +26,22 @@ class RegisterRequest extends FormRequest
         return [
             //
             'name' => 'required',
-            'email' => 'email:rfc,dns|required|unique:users',
+            'email' => 'required|unique:users',
             'first_name' => 'required',
             'password' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'A name is required',
+            'email.required' => 'A email is required',
+            'email.unique:users' => 'The email has exist',
+            //å∫'email.rfc,dns' => 'The email is invalid',
+            'first_name.required' => 'The first name is required',
+            'password.required' => 'The Password is required',
+        ];
+    }
+
 }
