@@ -25,7 +25,7 @@ class RegisterController extends Controller
             $data['code_activation'] = $code;
             $user = User::create($data);
             Mail::to($user->email)->send(new RegisterEmail($user));
-            // DB::commit();
+            DB::commit();
         } catch (Exception $e) {
             DB::rollback();
             return response()->json(['message' => $e->getMessage()], 500);
