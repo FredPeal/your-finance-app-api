@@ -29,6 +29,7 @@ class RegisterRequest extends FormRequest
             'email' => 'required|unique:users',
             'first_name' => 'required',
             'password' => 'required',
+            'phone' => 'required'
         ];
     }
 
@@ -41,6 +42,7 @@ class RegisterRequest extends FormRequest
             //å∫'email.rfc,dns' => 'The email is invalid',
             'first_name.required' => 'The first name is required',
             'password.required' => 'The Password is required',
+            'phone.required' => 'The Phone is required'
         ];
     }
 
