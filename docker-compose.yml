@@ -28,38 +28,34 @@ services:
 
     networks:
         - local-network
-  db:
-    image: mariadb
-    restart: always
-    container_name: your_finance_db
-    environment: 
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_PASSWORD}
+    ports:
+      - "16543:80"
     volumes:
-      - dbdata:/var/lib/mysql
+      - pgadmindata_your_finance:/var/lib/pgadmin
     networks:
       - local-network
-  phpmyadmin:
-    depends_on:
-      - db
-    image: phpmyadmin/phpmyadmin
+      - public-network
+  postgresql_db:
+    image: postgres
     restart: always
-    ports:
-      - 9001:80
+    container_name: your_finance_db
     environment:
-      PMA_HOST: db
-      PMA_ARBITRARY: 1
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-     - /sessions
-    networks: 
-      local-network:
-      public-network: 
+      - your_finance_data:/var/lib/postgresql/data
+    networks:
+      - local-network
 networks:
   local-network:
   public-network:
   
 volumes:
-  dbdata:
+  pgadmindata_your_finance:
+  your_finance_data:
