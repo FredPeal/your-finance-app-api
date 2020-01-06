@@ -26,3 +26,21 @@ axios({
     }
 })
 ```
+
+### Login
+**Before start with this endpoint on your header Content-Type must be application/x-www-form-urlencoded**
+
+``` 
+axios({
+    url: '/oauth/token',
+    method: 'POST',
+    data: {
+        grant_type:'password',
+        client_id: 1,
+        client_secret:'CLIENT_SECRET',
+        username:'jhon@doe.com',
+        password:'abc123456',
+        scope:''
+    }
+})
+```

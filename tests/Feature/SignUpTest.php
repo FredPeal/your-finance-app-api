@@ -13,7 +13,9 @@ class SignUpTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public $password, $email;
+
+    public function testSignUp()
     {
         $client = new Client(['base_uri' => 'https://randomuser.me/']);
         $response = $client->request('GET', 'api/');
@@ -27,10 +29,16 @@ class SignUpTest extends TestCase
             'password' => $body->results[0]->login->password,
             'phone' => $body->results[0]->phone
         ];
+
         $response = $this->withHeaders([
             'Content-Type', 'application/json',
             'Accept', 'application/json'
         ])->json('POST', '/api/sign-up', $data);
         $response->assertStatus(200);
     }
+
+    // public function testLogin()
+    // {
+
+    // }
 }

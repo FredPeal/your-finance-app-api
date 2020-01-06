@@ -22,6 +22,7 @@ class RegisterController extends Controller
         try {
             $code = uniqid();
             $data = $request->toArray();
+            $data['password'] = bcrypt($data['password']);
             $data['code_activation'] = $code;
             $user = User::create($data);
             Mail::to($user->email)->send(new RegisterEmail($user));
