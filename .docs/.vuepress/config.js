@@ -6,7 +6,8 @@ module.exports = {
       sidebar: [
           ["/", "Welcome"],
           ['/install-project/', "Install Project"],
-          ['/sign-up/', "Sign Up"]
+          ['/sign-up/', "Sign Up"],
+          ['/organizations/', 'Organizations'],
       ]
     }
   };

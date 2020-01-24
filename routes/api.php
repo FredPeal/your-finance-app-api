@@ -18,3 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/sign-up', 'Finance\RegisterController@register');
+Route::group(['middleware' => ['auth:api']], function(){
+    Route::resource('/organizations', 'Finance\OrganizationsController'); 
+});
